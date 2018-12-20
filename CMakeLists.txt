@@ -33,10 +33,32 @@ add_definitions(-DXPLM300=1)
 add_definitions(-DXPLM301=1)
 add_definitions(-DXPLM210=1)
 
-include_directories(${XPLM_SDK_ROOT_HEADER_WIDGET} ${XPLM_SDK_ROOT_HEADER_WRAPPER} ${XPLM_SDK_ROOT_HEADER_XPLM} ${OPENAL_INCLUDE_DIR} ${LUA_SRC})
+#SET(GLUT_ROOT ${PROJECT_SOURCE_DIR}/external/glut_win64/)
+#SET(GLUT_INCLUDE_DIR ${GLUT_ROOT}/include)
+#SET(GLUT_LIB_DIR ${GLUT_ROOT}/lib)
+
+SET(GLM_ROOT ${PROJECT_SOURCE_DIR}/external/glm-0.9.9.3)
+SET(SDL_ROOT ${PROJECT_SOURCE_DIR}/external/SDL2-2.0.9)
+SET(GLEW_ROOT ${PROJECT_SOURCE_DIR}/external/glew-2.1.0)
+
+include_directories(
+    ${GLM_ROOT}
+    ${GLEW_ROOT}/include
+    ${SDL_ROOT}/include
+)
+
+link_directories(
+    ${SDL_ROOT}/lib/x64
+    ${GLEW_ROOT}/lib/Release/x64
+)
+
+include_directories(${XPLM_SDK_ROOT_HEADER_WIDGET} ${XPLM_SDK_ROOT_HEADER_WRAPPER} ${XPLM_SDK_ROOT_HEADER_XPLM} ${OPENAL_INCLUDE_DIR} ${LUA_SRC} src)
 link_directories(${XPLM_SDK_LIBS})
 link_directories(${OPENAL_LIB_DIR})
 
+link_directories(${GLUT_LIB_DIR})
 
 add_subdirectory(${LUA_ROOT})
+add_subdirectory(experimental)
+add_subdirectory(src)
 
